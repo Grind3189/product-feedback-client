@@ -1,5 +1,5 @@
-import Header from "../components/header/Header";
-import SortSuggestions from "../components/sort/SortSuggestions";
+import Header from "../components/suggestions/header/Header";
+import SortSuggestions from "../components/suggestions/sort/SortSuggestions";
 
 function Suggestions() {
   return (

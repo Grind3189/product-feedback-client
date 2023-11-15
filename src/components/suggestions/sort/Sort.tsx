@@ -1,8 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
-import checkIc from "../../assets/shared/icon-check.svg";
 import React from "react";
+import SortItem from "./SortItem";
 
 const Sort = () => {
   const sortLists: string[] = [
@@ -12,21 +11,22 @@ const Sort = () => {
     "Least Comments",
   ];
   const [searchParams] = useSearchParams();
-  const pickedSort = searchParams.get("sort");
+  const pickedSort: string = searchParams.get("sort") || "Most Upvotes";
+
   return (
     <div className="relative">
       <Menu>
         <Menu.Button className="flex items-center gap-2">
           <span className="text-[0.875rem]">
-            Sort by : <b>Most Upvotes</b>
+            Sort by : <b>{pickedSort}</b>
           </span>
           <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M1 1l4 4 4-4"
               stroke="#fff"
-              stroke-width="2"
+              strokeWidth="2"
               fill="none"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             />
           </svg>
         </Menu.Button>
@@ -39,27 +39,11 @@ const Sort = () => {
           leaveFrom="translate-y-0 opacity-100"
           leaveTo="translate-y-[-20%] opacity-0"
         >
-          <Menu.Items className="text-dark-gray-#647196 absolute bottom-[-230px] flex w-[255px] flex-col rounded-[10px] border bg-white">
-            {sortLists.map((sort) => {
+          <Menu.Items className="text-dark-gray-#647196 absolute bottom-[-240px] flex w-[255px] flex-col rounded-[10px] bg-white shadow-md">
+            {sortLists.map(sort => {
               return (
-                <Menu.Item key={sort}>
-                  <Link
-                    to={`?sort=${sort}`}
-                    className="group flex items-center justify-between border-b px-6 py-3"
-                  >
-                    <span
-                      className={`group-hover:text-purple-#AD1FEA ${
-                        pickedSort === sort && "text-purple-#AD1FEA"
-                      }`}
-                    >
-                      {sort}
-                    </span>
-                    {pickedSort === sort && (
-                      <img src={checkIc} alt="check icon" />
-                    )}
-                  </Link>
-                </Menu.Item>
-              );
+                <SortItem pickedSort={pickedSort} sort={sort} key={sort} />
+              )
             })}
           </Menu.Items>
         </Transition>

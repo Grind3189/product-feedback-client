@@ -1,5 +1,5 @@
-import hamburgerIc from "../../assets/shared/mobile/icon-hamburger.svg";
-import closeIc from "../../assets/shared/mobile/icon-close.svg";
+import hamburgerIc from "../../../assets/shared/mobile/icon-hamburger.svg";
+import closeIc from "../../../assets/shared/mobile/icon-close.svg";
 import NavMenu from "./Menu/NavMenu";
 import { useState } from "react";
 

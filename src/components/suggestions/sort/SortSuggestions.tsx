@@ -1,4 +1,4 @@
-import suggestionIc from "../../assets/suggestions/icon-suggestions.svg";
+import suggestionIc from "../../../assets/suggestions/icon-suggestions.svg";
 import Sort from "./Sort";
 
 const SortSuggestions = () => {
