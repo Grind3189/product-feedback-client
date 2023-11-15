@@ -17,6 +17,7 @@ const NavMenu = ({ isMenuOpen, toggleMenu }: NavMenuProp) => {
       <div
         className={`bg-light-gray-#F7F8FD right-0 flex h-full w-[271px] flex-col items-center gap-6 p-6 transition-all max-md:absolute
           md:flex-row md:w-auto md:bg-none md:p-0 md:gap-[10px]
+          xl:flex-col xl:gap-6
            ${
              isMenuOpen
                ? "visible translate-x-0 opacity-100"

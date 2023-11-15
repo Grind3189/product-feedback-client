@@ -11,8 +11,8 @@ const Header = () => {
   };
 
   return (
-    <header className="h-[72px] md:flex md:h-[176px] md:gap-[10px]">
-      <div className="flex h-full items-center justify-between bg-gradient-to-tr from-blue-500 via-purple-600 to-pink-500 px-6 md:w-[223px] md:items-end md:rounded-[10px] md:py-6">
+    <header className="h-[72px] md:flex md:h-[176px] md:gap-[10px] md:mb-10 xl:flex-col xl:w-[255px] xl:h-auto xl:gap-6">
+      <div className="flex h-full items-center justify-between bg-gradient-to-tr from-blue-500 via-purple-600 to-pink-500 px-6 md:w-[223px] md:items-end md:rounded-[10px] md:py-6 xl:h-[137px] xl:w-full">
         <div className="text-white">
           <h1 className="text-[0.9375rem] font-bold tracking-[-0.187px] md:text-[1.25rem] md:tracking-[-0.25px]">
             Frontend Mentor
