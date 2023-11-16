@@ -10,7 +10,7 @@ const CommentList = () => {
 
       <div className="flex flex-col gap-8">
         {numberOfComments.map((comment) => {
-          return <Comment />;
+          return <Comment key={comment} />;
         })}
       </div>
     </div>

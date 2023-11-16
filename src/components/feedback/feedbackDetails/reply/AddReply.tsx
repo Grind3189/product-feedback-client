@@ -1,4 +1,4 @@
-import CustomButton from "../../shared/CustomButton";
+import CustomButton from "../../../shared/CustomButton";
 
 const AddReply = () => {
   return (

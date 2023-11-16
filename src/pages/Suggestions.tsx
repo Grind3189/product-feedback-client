@@ -1,7 +1,7 @@
-import EmptySuggestions from "../components/suggestions/empty/EmptySuggestions";
-import Header from "../components/suggestions/header/Header";
-import SortSuggestions from "../components/suggestions/sort/SortSuggestions";
-import SuggestionsList from "../components/suggestions/suggestionsList/SuggestionsList";
+import EmptySuggestions from "@components/suggestions/empty/EmptySuggestions";
+import Header from "@components/suggestions/header/Header";
+import SortSuggestions from "@components/suggestions/sort/SortSuggestions";
+import SuggestionsList from "@components/suggestions/suggestionsList/SuggestionsList";
 
 function Suggestions() {
   return (
@@ -10,8 +10,8 @@ function Suggestions() {
       <div className="xl:w-[825px]">
         <SortSuggestions />
         <div className="max-md:px-6 max-md:py-8">
-          <EmptySuggestions />
-          {/* <SuggestionsList /> */}
+          {/* <EmptySuggestions /> */}
+          <SuggestionsList />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import avatarImg from "../../../assets/user-images/image-anne.jpg";
+import avatarImg from "@assets/user-images/image-anne.jpg";
 import AddReply from "../reply/AddReply";
 import ReplyList from "../reply/ReplyList";
 

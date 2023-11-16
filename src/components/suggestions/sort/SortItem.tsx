@@ -1,6 +1,6 @@
 import { Menu } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import checkIc from "../../../assets/shared/icon-check.svg";
+import checkIc from "@assets/shared/icon-check.svg";
 
 interface SortItemProp {
   pickedSort: string;

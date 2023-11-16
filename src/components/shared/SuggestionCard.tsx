@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
-import arrowUpIc from "../../assets/shared/icon-arrow-up.svg";
-import commentIc from "../../assets/shared/icon-comments.svg";
+import { Link, useLocation } from "react-router-dom";
+import arrowUpIc from "@assets/shared/icon-arrow-up.svg";
+import commentIc from "@assets/shared/icon-comments.svg";
 
 const SuggestionCard = () => {
+  const location = useLocation();
   return (
     <Link
-      to="#"
+      to="/feedback/123"
+      state={{
+        prevPath: location.search
+          ? location.pathname + location.search
+          : location.pathname,
+      }}
       className="grid grid-cols-2 gap-y-4 rounded-[10px] bg-white p-6 md:w-full md:grid-cols-[50px_auto_auto] md:gap-x-10 md:gap-y-0"
     >
       <div className="col-start-1 col-end-[-1] flex flex-col gap-2 md:col-start-2 md:col-end-[-2] md:row-span-2">

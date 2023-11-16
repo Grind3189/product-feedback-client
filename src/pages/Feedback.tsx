@@ -1,6 +1,6 @@
-import AddComment from "../components/feedbackDetails/comments/AddComment";
-import CommentList from "../components/feedbackDetails/comments/CommentList";
-import SuggestionCard from "../components/shared/SuggestionCard";
+import AddComment from "@components/feedback/feedbackDetails/comments/AddComment";
+import CommentList from "@components/feedback/feedbackDetails/comments/CommentList";
+import SuggestionCard from "@components/shared/SuggestionCard";
 
 const Feedback = () => {
   return (

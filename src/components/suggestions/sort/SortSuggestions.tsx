@@ -1,4 +1,4 @@
-import suggestionIc from "../../../assets/suggestions/icon-suggestions.svg";
+import suggestionIc from "@assets/suggestions/icon-suggestions.svg";
 import CustomButton from "../../shared/CustomButton";
 import Sort from "./Sort";
 

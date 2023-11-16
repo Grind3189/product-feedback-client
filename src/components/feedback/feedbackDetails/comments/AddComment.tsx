@@ -1,5 +1,5 @@
 
-import CustomButton from "../../shared/CustomButton";
+import CustomButton from "../../../shared/CustomButton";
 
 const AddComment = () => {
   return (

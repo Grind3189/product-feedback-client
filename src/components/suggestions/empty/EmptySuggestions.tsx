@@ -1,4 +1,4 @@
-import emptyIllus from "../../../assets/suggestions/illustration-empty.svg";
+import emptyIllus from "@assets/suggestions/illustration-empty.svg";
 import CustomButton from "../../shared/CustomButton";
 
 const EmptySuggestions = () => {

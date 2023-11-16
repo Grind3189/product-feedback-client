@@ -1,5 +1,5 @@
 import { useState } from "react";
-import avatarImg from "../../../assets/user-images/image-ryan.jpg";
+import avatarImg from "@assets/user-images/image-ryan.jpg";
 import AddReply from "./AddReply";
 
 interface ReplyDetailsProp {
