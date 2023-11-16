@@ -3,12 +3,12 @@ import { Link, Outlet } from "react-router-dom";
 
 const FeedbackLayout = () => {
   return (
-    <div className="border max-md:p-6">
+    <div className="max-w-[730px] max-md:p-6">
       <div className="flex items-center gap-4">
         <img src={arrowLeftIc} alt="arrow left icon" />
         <Link
           to="#"
-          className="text-[0.8125rem] font-bold text-dark-gray-#647196"
+          className="text-[0.8125rem] font-bold text-dark-gray-#647196 md:text-[0.875rem]"
         >
           Go Back
         </Link>
