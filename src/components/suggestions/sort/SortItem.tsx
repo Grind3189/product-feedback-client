@@ -15,7 +15,7 @@ const SortItem = ({ pickedSort, sort }: SortItemProp) => {
         className="group flex items-center justify-between border-b px-6 py-3"
       >
         <span
-          className={`group-hover:text-purple-#AD1FEA ${
+          className={`lg:group-hover:text-purple-#AD1FEA ${
             pickedSort === sort && "text-purple-#AD1FEA"
           }`}
         >
