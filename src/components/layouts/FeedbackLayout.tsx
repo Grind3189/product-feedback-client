@@ -8,7 +8,7 @@ const FeedbackLayout = () => {
       <div className="flex items-center gap-4">
         <img src={arrowLeftIc} alt="arrow left icon" />
         <Link
-          to={location.state.prevPath ? location.state.prevPath : "/"}
+          to={location.state ? location.state.prevPath : "/"}
           className="text-[0.8125rem] font-bold text-dark-gray-#647196 md:text-[0.875rem]"
         >
           Go Back

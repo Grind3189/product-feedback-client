@@ -17,7 +17,7 @@ const Sort = () => {
     <div className="relative">
       <Menu>
         <Menu.Button className="flex items-center gap-2">
-          <span className="text-[0.875rem]">
+          <span className="text-[0.75rem]">
             Sort by : <b>{pickedSort}</b>
           </span>
           <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">

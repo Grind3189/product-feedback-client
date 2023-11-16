@@ -8,17 +8,17 @@ const Header = () => {
 
   useEffect(() => {
     const hideScrollbar = () => {
-      document.body.style.overflow = openNav ? "hidden" : "auto";
+      document.body.style.overflowY = openNav ? "hidden" : "auto";
     };
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        document.body.style.overflow = "auto";
+        document.body.style.overflowY = "auto";
       } else {
         hideScrollbar();
       }
     };
 
-    hideScrollbar();
+    handleResize()
     window.addEventListener("resize", handleResize);
 
     return () => {

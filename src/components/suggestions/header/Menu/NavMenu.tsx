@@ -9,7 +9,7 @@ interface NavMenuProp {
 const NavMenu = ({ isMenuOpen, toggleMenu }: NavMenuProp) => {
   return (
     <div
-      className={`relative h-[calc(100vh-72px)] w-full max-md:bg-black/50 transition-all
+      className={`relative h-[calc(100vh-72px)] w-full max-md:bg-black/50 overflow-hidden transition-all
         md:h-auto md:w-auto
         ${isMenuOpen ? "visible opacity-100" : "max-md:invisible max-md:opacity-0"}`}
       onClick={toggleMenu}

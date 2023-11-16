@@ -1,6 +1,7 @@
 import suggestionIc from "@assets/suggestions/icon-suggestions.svg";
 import CustomButton from "../../shared/CustomButton";
 import Sort from "./Sort";
+import { Link } from "react-router-dom";
 
 const SortSuggestions = () => {
   return (
@@ -14,9 +15,9 @@ const SortSuggestions = () => {
 
       <Sort />
 
-      <div className="ml-auto">
+      <Link to="/feedback/create" className="ml-auto">
         <CustomButton bgColor="purple">+ Add Feedback</CustomButton>
-      </div>
+      </Link>
     </section>
   );
 };

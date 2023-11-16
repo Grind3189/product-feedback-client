@@ -1,4 +1,4 @@
-
+import React from "react";
 import Suggestion from "../../shared/SuggestionCard";
 
 const SuggestionsList = () => {
