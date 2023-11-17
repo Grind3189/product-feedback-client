@@ -4,6 +4,7 @@ import Layout from "./components/layouts/Layout";
 import Feedback from "./pages/Feedback";
 import Suggestions from "./pages/Suggestions";
 import { Routes, Route } from "react-router-dom";
+import Roadmap from "pages/Roadmap";
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
           <Route path="feedback/create" element={<NewFeedback />} />
           <Route path="feedback/:feedbackId" element={<Feedback />} />
         </Route>
-        
       </Route>
+
+      <Route path="/roadmap" element={<Roadmap />} />
     </Routes>
   );
 }

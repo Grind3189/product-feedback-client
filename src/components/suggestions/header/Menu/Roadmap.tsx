@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MenuCard from "./MenuCard";
 
 const Roadmap = () => {
@@ -7,7 +8,7 @@ const Roadmap = () => {
     <MenuCard>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-[1.125rem] font-bold tracking-[0.25px] text-light-navy-blue-#3A4374">Roadmap</h1>
-        <span className="text-[0.8125rem] font-semibold underline text-blue-#4661E6">View</span>
+        <Link to="/roadmap" className="text-[0.8125rem] font-semibold underline text-blue-#4661E6">View</Link>
       </div>
 
       <div className="flex flex-col gap-2">
