@@ -7,7 +7,7 @@ interface FormInputDescProp {
 }
 const FormInputDesc = ({ children, title, guide }: FormInputDescProp) => {
   return (
-    <div className="flex flex-col gap-4 text-[0.8125rem]">
+    <div className="flex flex-col gap-4 text-[0.8125rem] md:text-[0.875rem]">
       <div>
         <h2 className="font-bold tracking-[-0.181px] text-light-navy-blue-#3A4374">
           {title}

@@ -1,6 +1,6 @@
 interface CustomButtonProp {
   children: React.ReactNode;
-  bgColor: "purple" | "";
+  bgColor: "purple" | "light navy blue" | "";
   // handleClick: () => void
 }
 
@@ -8,7 +8,9 @@ const CustomButton = ({ children, bgColor }: CustomButtonProp) => {
   return (
     <button
       className={`rounded-[10px] ${
-        bgColor === "purple" && "bg-purple-#AD1FEA lg:hover:bg-[#C75AF6]"
+        bgColor === "purple"
+          ? "bg-purple-#AD1FEA lg:hover:bg-[#C75AF6]"
+          : "bg-light-navy-blue-#3A4374 lg:hover:bg-[#656EA3]"
       } px-4 py-[0.6563rem] text-[0.875rem] font-bold text-white md:px-6 md:py-3`}
     >
       {children}
