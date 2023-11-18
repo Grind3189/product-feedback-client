@@ -4,9 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 const RoadmapHeader = () => {
     const location = useLocation()
   return (
-    <header className="bg-navy-blue-#373F68 text-white py-[1.625rem] px-6 flex items-center justify-between md:rounded-[10px]">
+    <header className="bg-navy-blue-#373F68 text-white py-[1.625rem] px-6 flex items-center justify-between md:rounded-[10px] md:px-8">
       <div className="font-bold">
-        <Link to="#" className="flex items-center gap-4">
+        <Link to={location.state ? location.state.prevPath : "/"} className="flex items-center gap-4">
           <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M6 9L2 5l4-4"
