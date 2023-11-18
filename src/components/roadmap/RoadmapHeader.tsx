@@ -11,9 +11,9 @@ const RoadmapHeader = () => {
             <path
               d="M6 9L2 5l4-4"
               stroke="#CDD2EE"
-              stroke-width="2"
+              strokeWidth="2"
               fill="none"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             />
           </svg>
           <span className="text-[0.8125rem] md:text-[0.875rem]">Go Back</span>
