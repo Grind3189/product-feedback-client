@@ -1,15 +1,21 @@
 
+import { ReplyType } from "utils/types";
 import ReplyDetails from "./ReplyDetails";
 
-const ReplyList = () => {
-  const numOfReplies: number[] = [1, 2, 3, 4, 5];
+interface ReplyListProp {
+  replies: ReplyType[]
+}
+
+const ReplyList = ({replies}: ReplyListProp) => {
+ console.log(replies.length)
   return (
     <div className="col-span-2 flex flex-col">
-      {numOfReplies.map((reply, i) => {
+      {replies.map((reply, i) => {
         return (
           <ReplyDetails
-            isLastChild={i === numOfReplies.length - 1}
-            key={reply}
+            isLastChild={i === replies.length - 1}
+            reply={reply}
+            key={i}
           />
         );
       })}
