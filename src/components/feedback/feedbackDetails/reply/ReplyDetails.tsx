@@ -44,7 +44,7 @@ const ReplyDetails = ({ isLastChild, reply }: ReplyDetailsProp) => {
 
       {/* Reply Line */}
       <div
-        className={`absolute h-full border-r md:left-[17px] ${isLastChild && "h-[25%]"}`}
+        className={`absolute h-full border-r md:left-[17px] ${isLastChild && "h-[35px] md:h-[40px]"}`}
       />
       {addReply && <AddReply />}
     </div>

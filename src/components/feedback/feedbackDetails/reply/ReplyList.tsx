@@ -7,7 +7,6 @@ interface ReplyListProp {
 }
 
 const ReplyList = ({replies}: ReplyListProp) => {
- console.log(replies.length)
   return (
     <div className="col-span-2 flex flex-col">
       {replies.map((reply, i) => {

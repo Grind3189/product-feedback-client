@@ -17,7 +17,7 @@ const SuggestionCard = ({ suggestion }: SuggestionCardProp) => {
           ? location.pathname + location.search
           : location.pathname,
       }}
-      className="grid grid-cols-2 gap-y-4 rounded-[10px] bg-white p-6 md:w-full md:grid-cols-[50px_auto_auto] md:gap-x-10 md:gap-y-0"
+      className="grid grid-cols-2 gap-y-4 rounded-[10px] bg-white p-6 md:w-full md:grid-cols-[50px_auto_auto] md:gap-x-10 md:gap-y-0 w-full"
     >
       <div className="col-start-1 col-end-[-1] flex flex-col gap-2 md:col-start-2 md:col-end-[-2] md:row-span-2">
         <h1 className="text-[1.125rem] font-bold tracking-[-0.25px] text-light-navy-blue-#3A4374">
