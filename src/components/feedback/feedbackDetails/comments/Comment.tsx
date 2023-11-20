@@ -1,23 +1,24 @@
 import { useState } from "react";
 import AddReply from "../reply/AddReply";
 import ReplyList from "../reply/ReplyList";
-import { CommentType } from "utils/types";
+import { CommentType, SuggestionType } from "utils/types";
 
 interface CommentProp {
   comment: CommentType;
+  setFeedback: React.Dispatch<React.SetStateAction<SuggestionType | undefined>>;
 }
 
-const Comment = ({ comment }: CommentProp) => {
-  const [addComment, setAddComment] = useState<boolean>(false);
+const Comment = ({ comment, setFeedback }: CommentProp) => {
+  const [addReply, setAddReply] = useState<boolean>(false);
 
   const toggleAddComment = () => {
-    setAddComment(!addComment);
+    setAddReply(!addReply);
   };
 
   return (
     <div
       className={`grid grid-cols-[40px_auto] gap-4 border-b pb-6 last:border-none md:gap-x-8 ${
-        comment.replies.length > 1 ? "md:gap-y-0" : "md:gap-y-[1.0625rem]"
+        comment.replies.length > 0 ? "md:gap-y-0" : "md:gap-y-[1.0625rem]"
       } md:pb-8`}
     >
       <img
@@ -31,7 +32,7 @@ const Comment = ({ comment }: CommentProp) => {
 
       <div className="flex items-center text-[0.8125rem] md:text-[0.875rem]">
         <div className="flex flex-col text-light-navy-blue-#3A4374">
-          <span className="font-bold tracking-[-0.181px] md:tracking-[-0.194px]">
+          <span className="font-bold capitalize tracking-[-0.181px] md:tracking-[-0.194px]">
             {comment.user.name}
           </span>
           <span>{comment.user.username}</span>
@@ -47,20 +48,33 @@ const Comment = ({ comment }: CommentProp) => {
       <div className="relative col-start-1 col-end-[-1] md:col-start-2">
         <p
           className={`text-[0.8125rem] text-dark-gray-#647196 md:text-[0.9375rem] ${
-            comment.replies.length > 1 && "mt-4"
+            comment.replies.length > 0 && "mt-4"
           }`}
         >
           {comment.content}
         </p>
 
         {/* Comment vertical line */}
-        {comment.replies.length > 1 && !addComment && (
-          <div className="absolute left-[18px] top-[23px] h-full border-r max-md:hidden md:left-[-55px]" />
+        {comment.replies.length > 0 && !addReply && (
+          <div className="absolute left-[18px] h-full border-r max-md:hidden md:left-[-55px] md:top-[20px]" />
         )}
       </div>
 
-      {addComment && <AddReply />}
-      {comment.replies.length > 1 && <ReplyList replies={comment.replies} />}
+      {addReply && (
+        <AddReply
+          replyingTo={comment.user.username}
+          commentId={comment._id}
+          setFeedback={setFeedback}
+          toggleAddComment={toggleAddComment}
+        />
+      )}
+      {comment.replies.length > 0 && (
+        <ReplyList
+          replies={comment.replies}
+          setFeedback={setFeedback}
+          commentId={comment._id}
+        />
+      )}
     </div>
   );
 };

@@ -47,7 +47,7 @@ const Feedback = () => {
       ) : (
         <>
           {feedback && <SuggestionCard suggestion={feedback} handleClick={handleLike} type="view" />}
-          {feedback?.comments && <CommentList comments={feedback.comments} />}
+          {feedback?.comments && <CommentList comments={feedback.comments} setFeedback={setFeedback} />}
           <AddComment setFeedback={setFeedback} />
         </>
       )}
