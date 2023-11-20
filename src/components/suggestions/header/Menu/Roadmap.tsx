@@ -1,9 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
 import MenuCard from "./MenuCard";
+import useFetch from "hooks/useFetch";
+import { SuggestionType } from "utils/types";
+
+interface RoadmapType {
+  status: string
+  data: SuggestionType[]
+}
 
 const Roadmap = () => {
-  const roadmapLists: string[] = ["Planned", "In-Progress", "Live"];
   const svgColors: string[] = ["#F49F85", "#AD1FEA", "#62BCFA"];
+  const [roadmapList] = useFetch("/roadmaps")
   const location = useLocation()
 
   return (
@@ -14,9 +21,9 @@ const Roadmap = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        {roadmapLists.map((roadmap, index) => {
+        {roadmapList?.map((roadmap: RoadmapType, index: number) => {
           return (
-            <div className="flex items-center gap-4 text-dark-gray-#647196" key={index}>
+            <div className="flex items-center gap-4 text-dark-gray-#647196" key={roadmap?.status}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="8"
@@ -26,8 +33,8 @@ const Roadmap = () => {
               >
                 <circle cx="4" cy="4" r="4" fill={svgColors[index]} />
               </svg>
-              <span>{roadmap}</span>
-              <span className="ml-auto font-bold">2</span>
+              <span className="capitalize">{roadmap?.status}</span>
+              <span className="ml-auto font-bold">{roadmap?.data.length || 0}</span>
             </div>
           );
         })}

@@ -25,7 +25,7 @@ const Categories = () => {
         {categories.map((category) => {
           return (
             <li
-              className={`rounded-[0.625rem] px-4 py-[6px] text-blue-#4661E6 ${
+              className={`rounded-[0.625rem] text-blue-#4661E6 ${
                 categoryParams === category ||
                 (!categoryParams && category === "All")
                   ? "bg-blue-#4661E6 text-white"
@@ -35,7 +35,7 @@ const Categories = () => {
             >
               <Link
                 to={genNewSearchParams("category", category)}
-                className="text-[0.8125rem] font-semibold"
+                className="text-[0.8125rem] font-semibold px-4 py-[6px] inline-block"
               >
                 {category}
               </Link>

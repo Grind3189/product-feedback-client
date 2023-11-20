@@ -5,6 +5,7 @@ export interface SuggestionType {
   description: string;
   status: string;
   upvotes: number;
+  isLiked: boolean;
   comments: CommentType[];
 }
 

@@ -2,13 +2,41 @@ import AddComment from "@components/feedback/feedbackDetails/comments/AddComment
 import CommentList from "@components/feedback/feedbackDetails/comments/CommentList";
 import SuggestionCard from "@components/shared/SuggestionCard";
 import { useParams } from "react-router-dom";
-import useFetch from "hooks/useFetch";
+import { useState, useEffect } from "react";
+import { makeRequest } from "utils/makeRequest";
+import { SuggestionType } from "utils/types";
+import { getUserId } from "utils/getUserIdFromStorage";
 
 const Feedback = () => {
   const params = useParams();
-  const [feedback, loading] = useFetch(
-    `/suggestion/${params.feedbackId}`,
-  );
+  const [feedback, setFeedback] = useState<SuggestionType>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchFeedback = async () => {
+      setLoading(true);
+      try {
+        const res = await makeRequest.post(`/suggestion/${params.feedbackId}`, {
+          userId: getUserId(),
+        });
+        setFeedback(res.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeedback();
+  }, []);
+
+  const handleLike = async () => {
+    const res = await makeRequest.post(`/suggestion/like/${params.feedbackId}`, {
+      userId: getUserId(),
+    });
+    setFeedback(res.data)
+    
+  };
 
   return (
     <main className="mt-6 flex flex-col gap-6">
@@ -18,9 +46,9 @@ const Feedback = () => {
         </h1>
       ) : (
         <>
-          {feedback && <SuggestionCard suggestion={feedback} />}
+          {feedback && <SuggestionCard suggestion={feedback} handleClick={handleLike} type="view" />}
           {feedback?.comments && <CommentList comments={feedback.comments} />}
-          <AddComment />
+          <AddComment setFeedback={setFeedback} />
         </>
       )}
     </main>

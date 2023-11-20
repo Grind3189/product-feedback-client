@@ -4,6 +4,7 @@ import SortSuggestions from "@components/suggestions/sort/SortSuggestions";
 import SuggestionsList from "@components/suggestions/suggestionsList/SuggestionsList";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { getUserId } from "utils/getUserIdFromStorage";
 import { makeRequest } from "utils/makeRequest";
 import { SuggestionType } from "utils/types";
 
@@ -13,18 +14,14 @@ function Suggestions() {
   const [searchParams] = useSearchParams();
   const query = searchParams.toString() || ""
 
-  console.log(query)
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const fromStorage = localStorage.getItem("userId");
-      const parsedData = fromStorage ? JSON.parse(fromStorage) : "";
       try {
         const res = await makeRequest.post(
           query ? `/suggestions?${query}` : "/suggestions",
           {
-            userId: parsedData,
+            userId: getUserId(),
           },
         );
         localStorage.setItem(
@@ -42,6 +39,16 @@ function Suggestions() {
     fetchData();
   }, [query]);
 
+
+  const handleUpdateSuggestion = (updatedSuggestion: SuggestionType) => {
+    const tempSuggestions = suggestions
+    setSuggestions(tempSuggestions.map(suggestion => {
+      if (suggestion._id === updatedSuggestion._id) {
+        return updatedSuggestion
+      } else return suggestion
+    }))
+  }
+
   return (
     <div className="gap-[1.875rem] xl:flex">
       <Header />
@@ -52,7 +59,7 @@ function Suggestions() {
             {!suggestions.length ? (
               <EmptySuggestions />
             ) : (
-              <SuggestionsList suggestions={suggestions} />
+              <SuggestionsList suggestions={suggestions} updateSuggestion={handleUpdateSuggestion} />
             )}
           </div>
         ) : (
