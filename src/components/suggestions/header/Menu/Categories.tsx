@@ -1,6 +1,9 @@
+import { Link, useSearchParams } from "react-router-dom";
 import MenuCard from "./MenuCard";
 
 const Categories = () => {
+  const [searchParams] = useSearchParams();
+  const categoryParams = searchParams.get("category");
   const categories: string[] = [
     "All",
     "UI",
@@ -9,15 +12,33 @@ const Categories = () => {
     "Bug",
     "Feature",
   ];
+
+  const genNewSearchParams = (filterName: string, value: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set(filterName, value);
+    return `?${params.toString()}`;
+  };
+
   return (
     <MenuCard>
-      <ul className="flex flex-wrap gap-2 gap-y-[20px] md:gap-y-[14px] md:items-center">
+      <ul className="flex flex-wrap gap-2 gap-y-[20px] md:items-center md:gap-y-[14px]">
         {categories.map((category) => {
           return (
-            <li className="bg-gray-#F2F4FF rounded-[0.625rem] px-4 py-[6px]" key={category}>
-              <span className="text-blue-#4661E6 text-[0.8125rem] font-semibold">
+            <li
+              className={`rounded-[0.625rem] px-4 py-[6px] text-blue-#4661E6 ${
+                categoryParams === category ||
+                (!categoryParams && category === "All")
+                  ? "bg-blue-#4661E6 text-white"
+                  : "bg-gray-#F2F4FF"
+              }`}
+              key={category}
+            >
+              <Link
+                to={genNewSearchParams("category", category)}
+                className="text-[0.8125rem] font-semibold"
+              >
                 {category}
-              </span>
+              </Link>
             </li>
           );
         })}

@@ -1,5 +1,5 @@
 import { Menu } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import checkIc from "@assets/shared/icon-check.svg";
 
 interface SortItemProp {
@@ -8,10 +8,17 @@ interface SortItemProp {
 }
 
 const SortItem = ({ pickedSort, sort }: SortItemProp) => {
+  const [searchParams] = useSearchParams()
+  const genNewSearchParams = (filterName: string, value: string) => {
+    const params = new URLSearchParams(searchParams)
+    params.set(filterName, value)
+    return `?${params.toString()}`
+  }
+  
   return (
     <Menu.Item>
       <Link
-        to={`?sort=${sort}`}
+        to={genNewSearchParams("sort", sort)}
         className="group flex items-center justify-between border-b px-6 py-3"
       >
         <span

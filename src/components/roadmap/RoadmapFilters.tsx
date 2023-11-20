@@ -10,7 +10,6 @@ interface RoadmapFiltersProp {
 
 const RoadmapFilters = ({ roadmaps }: RoadmapFiltersProp) => {
   const colors: string[] = ["#F49F85", "#AD1FEA", "#62BCFA"];
-  console.log(roadmaps)
   const [searchParams] = useSearchParams();
   const roadmapParams = searchParams.get("view") || "Planned";
 

@@ -11,7 +11,9 @@ function Suggestions() {
   const [suggestions, setSuggestions] = useState<SuggestionType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchParams] = useSearchParams();
-  const query = searchParams.get("sort") ? searchParams.get("sort") : "";
+  const query = searchParams.toString() || ""
+
+  console.log(query)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +22,7 @@ function Suggestions() {
       const parsedData = fromStorage ? JSON.parse(fromStorage) : "";
       try {
         const res = await makeRequest.post(
-          query ? `/suggestions?sort=${query}` : "/suggestions",
+          query ? `/suggestions?${query}` : "/suggestions",
           {
             userId: parsedData,
           },
@@ -44,7 +46,7 @@ function Suggestions() {
     <div className="gap-[1.875rem] xl:flex">
       <Header />
       <div className="xl:w-[825px]">
-        <SortSuggestions />
+        <SortSuggestions suggestionsCount={suggestions?.length} />
         {!loading ? (
           <div className="max-md:px-6 max-md:py-8">
             {!suggestions.length ? (
