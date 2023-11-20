@@ -4,10 +4,10 @@ import ReplyList from "../reply/ReplyList";
 import { CommentType } from "utils/types";
 
 interface CommentProp {
-  comment: CommentType
+  comment: CommentType;
 }
 
-const Comment = ({comment}: CommentProp) => {
+const Comment = ({ comment }: CommentProp) => {
   const [addComment, setAddComment] = useState<boolean>(false);
 
   const toggleAddComment = () => {
@@ -16,14 +16,17 @@ const Comment = ({comment}: CommentProp) => {
 
   return (
     <div
-      className={`grid grid-cols-[40px_auto] gap-4 border-b pb-6 md:gap-x-8 last:border-none ${
+      className={`grid grid-cols-[40px_auto] gap-4 border-b pb-6 last:border-none md:gap-x-8 ${
         comment.replies.length > 1 ? "md:gap-y-0" : "md:gap-y-[1.0625rem]"
       } md:pb-8`}
     >
       <img
-        src={comment.user.image}
+        src={
+          comment.user.image ||
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+        }
         alt={`image of ${comment.user.username} `}
-        className="h-[40px] w-[40px] self-center rounded-[50%] object-cover bg-gray-100"
+        className="h-[40px] w-[40px] self-center rounded-[50%] bg-gray-100 object-cover"
       />
 
       <div className="flex items-center text-[0.8125rem] md:text-[0.875rem]">
@@ -42,7 +45,11 @@ const Comment = ({comment}: CommentProp) => {
       </div>
 
       <div className="relative col-start-1 col-end-[-1] md:col-start-2">
-        <p className={`text-[0.8125rem] text-dark-gray-#647196 md:text-[0.9375rem] ${comment.replies.length > 1 && "mt-4"}`}>
+        <p
+          className={`text-[0.8125rem] text-dark-gray-#647196 md:text-[0.9375rem] ${
+            comment.replies.length > 1 && "mt-4"
+          }`}
+        >
           {comment.content}
         </p>
 

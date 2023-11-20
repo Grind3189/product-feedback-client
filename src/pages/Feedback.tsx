@@ -9,7 +9,6 @@ const Feedback = () => {
   const [feedback, loading] = useFetch(
     `/suggestion/${params.feedbackId}`,
   );
-  console.log(loading);
 
   return (
     <main className="mt-6 flex flex-col gap-6">
