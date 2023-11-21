@@ -3,7 +3,6 @@ import CustomButton from "../../../shared/CustomButton";
 import { makeRequest } from "utils/makeRequest";
 import { useParams } from "react-router-dom";
 import { SuggestionType } from "utils/types";
-import { getUserId } from "utils/getUserIdFromStorage";
 
 interface AddCommentProp {
   setFeedback: React.Dispatch<React.SetStateAction<SuggestionType | undefined>>;
@@ -25,7 +24,6 @@ const AddComment = ({ setFeedback }: AddCommentProp) => {
         const res = await makeRequest.post(
           `suggestion/addComment/${feedbackId}`,
           {
-            userId: getUserId(),
             newComment,
           },
         );

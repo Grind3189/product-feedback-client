@@ -2,7 +2,6 @@ import { makeRequest } from "utils/makeRequest";
 import CustomButton from "../../../shared/CustomButton";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserId } from "utils/getUserIdFromStorage";
 import { SuggestionType } from "utils/types";
 
 interface AddReplyProp {
@@ -28,7 +27,6 @@ const AddReply = ({ replyingTo, commentId, setFeedback, toggleAddComment }: AddR
         commentId,
         replyingTo,
         reply,
-        userId: getUserId(),
       });
       setFeedback(res.data);
       setReply("")
@@ -45,6 +43,7 @@ const AddReply = ({ replyingTo, commentId, setFeedback, toggleAddComment }: AddR
         onChange={handleChangeReplyDetails}
         maxLength={250}
         value={reply}
+        placeholder="Type your reply here"
       />
 
       <div className="h-[117px]">

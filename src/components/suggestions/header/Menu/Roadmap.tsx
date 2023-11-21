@@ -10,7 +10,7 @@ interface RoadmapType {
 
 const Roadmap = () => {
   const svgColors: string[] = ["#F49F85", "#AD1FEA", "#62BCFA"];
-  const [roadmapList] = useFetch("/roadmaps")
+  const [roadmapList] = useFetch("/roadmap/getAll")
   const location = useLocation()
 
   return (

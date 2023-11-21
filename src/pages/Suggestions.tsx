@@ -4,7 +4,6 @@ import SortSuggestions from "@components/suggestions/sort/SortSuggestions";
 import SuggestionsList from "@components/suggestions/suggestionsList/SuggestionsList";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getUserId } from "utils/getUserIdFromStorage";
 import { makeRequest } from "utils/makeRequest";
 import { SuggestionType } from "utils/types";
 
@@ -12,21 +11,14 @@ function Suggestions() {
   const [suggestions, setSuggestions] = useState<SuggestionType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchParams] = useSearchParams();
-  const query = searchParams.toString() || ""
+  const query = searchParams.toString() || "";
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await makeRequest.post(
-          query ? `/suggestions?${query}` : "/suggestions",
-          {
-            userId: getUserId(),
-          },
-        );
-        localStorage.setItem(
-          "userId",
-          JSON.stringify(res.data.currentUser._id),
+        const res = await makeRequest.get(
+          `/suggestion/getAll${query && "?" + query}`
         );
         setSuggestions(res.data.suggestions);
       } catch (err) {
@@ -39,15 +31,16 @@ function Suggestions() {
     fetchData();
   }, [query]);
 
-
   const handleUpdateSuggestion = (updatedSuggestion: SuggestionType) => {
-    const tempSuggestions = suggestions
-    setSuggestions(tempSuggestions.map(suggestion => {
-      if (suggestion._id === updatedSuggestion._id) {
-        return updatedSuggestion
-      } else return suggestion
-    }))
-  }
+    const tempSuggestions = suggestions;
+    setSuggestions(
+      tempSuggestions.map((suggestion) => {
+        if (suggestion._id === updatedSuggestion._id) {
+          return updatedSuggestion;
+        } else return suggestion;
+      }),
+    );
+  };
 
   return (
     <div className="gap-[1.875rem] xl:flex">
@@ -59,11 +52,14 @@ function Suggestions() {
             {!suggestions.length ? (
               <EmptySuggestions />
             ) : (
-              <SuggestionsList suggestions={suggestions} updateSuggestion={handleUpdateSuggestion} />
+              <SuggestionsList
+                suggestions={suggestions}
+                updateSuggestion={handleUpdateSuggestion}
+              />
             )}
           </div>
         ) : (
-          <h1 className="text-[2rem] font-bold text-light-navy-blue-#3A4374 m-8 md:m-0">
+          <h1 className="m-8 text-[2rem] font-bold text-light-navy-blue-#3A4374 md:m-0">
             Loading...
           </h1>
         )}

@@ -4,7 +4,7 @@ import RoadmapList from "@components/roadmap/RoadmapList";
 import useFetch from "hooks/useFetch";
 
 function Roadmap() {
-  const [roadmapData, loading] = useFetch("/roadmaps");
+  const [roadmapData, loading] = useFetch("/roadmap/getAll");
 
   return (
     <main className="md:px-[2.4375rem] md:py-14 xl:mx-auto xl:max-w-[1110px] xl:px-0 xl:py-[4.875rem]">

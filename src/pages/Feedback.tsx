@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { makeRequest } from "utils/makeRequest";
 import { SuggestionType } from "utils/types";
-import { getUserId } from "utils/getUserIdFromStorage";
 
 const Feedback = () => {
   const params = useParams();
@@ -16,9 +15,7 @@ const Feedback = () => {
     const fetchFeedback = async () => {
       setLoading(true);
       try {
-        const res = await makeRequest.post(`/suggestion/${params.feedbackId}`, {
-          userId: getUserId(),
-        });
+        const res = await makeRequest.get(`/suggestion/${params.feedbackId}`);
         setFeedback(res.data);
       } catch (err) {
         console.error(err);
@@ -31,9 +28,7 @@ const Feedback = () => {
   }, []);
 
   const handleLike = async () => {
-    const res = await makeRequest.post(`/suggestion/like/${params.feedbackId}`, {
-      userId: getUserId(),
-    });
+    const res = await makeRequest.get(`/suggestion/like/${params.feedbackId}`);
     setFeedback(res.data)
     
   };

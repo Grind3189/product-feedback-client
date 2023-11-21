@@ -14,11 +14,7 @@ const SuggestionsList = ({
 
   const handleLike = async (suggestionId: string) => {
     try {
-      const fromStorage = localStorage.getItem("userId");
-      const parsedData = fromStorage ? JSON.parse(fromStorage) : "";
-      const res = await makeRequest.post(`/suggestion/like/${suggestionId}`, {
-        userId: parsedData,
-      });
+      const res = await makeRequest.get(`/suggestion/like/${suggestionId}`);
       updateSuggestion(res.data);
     } catch (err) {
       console.error(err);
