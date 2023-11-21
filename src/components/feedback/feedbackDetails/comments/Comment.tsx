@@ -2,6 +2,7 @@ import { useState } from "react";
 import AddReply from "../reply/AddReply";
 import ReplyList from "../reply/ReplyList";
 import { CommentType, SuggestionType } from "utils/types";
+import DeleteButton from "@components/shared/DeleteButton";
 
 interface CommentProp {
   comment: CommentType;
@@ -37,12 +38,15 @@ const Comment = ({ comment, setFeedback }: CommentProp) => {
           </span>
           <span>{comment.user.username}</span>
         </div>
-        <button
-          className="ml-auto font-semibold text-blue-#4661E6"
-          onClick={toggleAddComment}
-        >
-          Reply
-        </button>
+        <div className="ml-auto flex flex-col items-center gap-1">
+          <button
+            className="font-semibold text-blue-#4661E6"
+            onClick={toggleAddComment}
+          >
+            Reply
+          </button>
+          <DeleteButton />
+        </div>
       </div>
 
       <div className="relative col-start-1 col-end-[-1] md:col-start-2">

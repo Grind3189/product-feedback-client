@@ -3,8 +3,35 @@ import arrowDownIc from "@assets/shared/icon-arrow-down.svg";
 import React from "react";
 import CategoryItem from "./CategoryItem";
 
-const CategorySelect = () => {
-  const categoryList: string[] = ["Feature", "UI", "UX", "Enhancement", "Bug"];
+interface NewFeedbackType {
+  title: string;
+  category: string;
+  description: string;
+}
+
+interface CategorySelectProp {
+  setNewFeedback: React.Dispatch<React.SetStateAction<NewFeedbackType>>;
+  pickedCategory: string;
+}
+
+const CategorySelect = ({
+  setNewFeedback,
+  pickedCategory,
+}: CategorySelectProp) => {
+  const categoryList: string[] = ["feature", "ui", "ux", "enhancement", "bug"];
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    //There's a bug on finding dataset.value when I dont put it in a variable
+    const category = e.currentTarget.dataset.value;
+    e.preventDefault();
+    setNewFeedback((prev: any) => {
+      return {
+        ...prev,
+        category,
+      };
+    });
+  };
+
   return (
     <div className="relative">
       <Menu>
@@ -15,8 +42,14 @@ const CategorySelect = () => {
                 open && "border border-blue-#4661E6"
               }`}
             >
-              <span className="text-[0.8125rem] text-light-navy-blue-#3A4374 md:text-[0.9375rem] xl:text-[1rem]">
-                Feature
+              <span
+                className={`text-[0.8125rem] text-light-navy-blue-#3A4374 md:text-[0.9375rem] xl:text-[1rem] ${
+                  pickedCategory === "ui" || pickedCategory === "ux"
+                    ? "uppercase"
+                    : "capitalize"
+                }`}
+              >
+                {pickedCategory}
               </span>
               <img
                 src={arrowDownIc}
@@ -40,7 +73,14 @@ const CategorySelect = () => {
                 static
               >
                 {categoryList.map((category) => {
-                  return <CategoryItem key={category} category={category} />;
+                  return (
+                    <CategoryItem
+                      key={category}
+                      category={category}
+                      handleClick={handleClick}
+                      pickedCategory={pickedCategory}
+                    />
+                  );
                 })}
               </Menu.Items>
             </Transition>

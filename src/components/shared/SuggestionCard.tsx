@@ -7,16 +7,20 @@ import { SuggestionType } from "utils/types";
 interface SuggestionCardProp {
   suggestion: SuggestionType;
   handleClick: (suggestionId: string) => void;
-  type: "list" | "view"
+  type: "list" | "view";
 }
 
-const SuggestionCard = ({ suggestion, handleClick, type }: SuggestionCardProp) => {
+const SuggestionCard = ({
+  suggestion,
+  handleClick,
+  type,
+}: SuggestionCardProp) => {
   const location = useLocation();
 
   const stopPropogation = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    handleClick(suggestion._id)
-  }
+    e.preventDefault();
+    handleClick(suggestion._id);
+  };
 
   return (
     <Link
@@ -26,9 +30,9 @@ const SuggestionCard = ({ suggestion, handleClick, type }: SuggestionCardProp) =
           ? location.pathname + location.search
           : location.pathname,
       }}
-      className={`grid w-full grid-cols-2 gap-y-4 rounded-[10px] bg-white p-6 transition-all md:w-full md:grid-cols-[50px_auto_auto] md:gap-x-10 md:gap-y-0 ${type === "list" ? "cursor-pointer" : "cursor-default"} ${
-        location.pathname === "/" && "lg:hover:shadow-md"
-      } `}
+      className={`grid w-full grid-cols-2 gap-y-4 rounded-[10px] bg-white p-6 transition-all md:min-w-[730px] md:grid-cols-[50px_auto_auto] md:gap-x-10 md:gap-y-0 ${
+        type === "list" ? "cursor-pointer" : "cursor-default"
+      } ${location.pathname === "/" && "lg:hover:shadow-md"} `}
     >
       <div className="col-start-1 col-end-[-1] flex flex-col gap-2 md:col-start-2 md:col-end-[-2] md:row-span-2">
         <h1 className="text-[1.125rem] font-bold tracking-[-0.25px] text-light-navy-blue-#3A4374">
@@ -48,7 +52,10 @@ const SuggestionCard = ({ suggestion, handleClick, type }: SuggestionCardProp) =
         } lg:hover:bg-[#CFD7FF]`}
         onClick={stopPropogation}
       >
-        <img src={suggestion.isLiked ? arrowUpIcWhite : arrowUpIc} alt="arrow up icon" />
+        <img
+          src={suggestion.isLiked ? arrowUpIcWhite : arrowUpIc}
+          alt="arrow up icon"
+        />
         <span className="max-w-[36px] overflow-hidden text-ellipsis text-[0.8125rem] font-bold tracking-[-0.181px]">
           {suggestion?.upvotes}
         </span>

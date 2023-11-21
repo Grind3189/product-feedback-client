@@ -3,7 +3,7 @@ import { makeRequest } from "utils/makeRequest";
 
 const useFetch = (url: string) => {
   const [data, setData] = useState<any>();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
