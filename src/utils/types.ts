@@ -20,6 +20,7 @@ export interface ReplyType {
   content: string;
   replyingTo: string;
   user: UserType;
+  _id: string
 }
 
 export interface UserType {

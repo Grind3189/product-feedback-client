@@ -43,7 +43,7 @@ const AddReply = ({ replyingTo, commentId, setFeedback, toggleAddComment }: AddR
         onChange={handleChangeReplyDetails}
         maxLength={250}
         value={reply}
-        placeholder="Type your reply here"
+        placeholder={`Replying to @${replyingTo}`}
       />
 
       <div className="h-[117px]">

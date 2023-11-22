@@ -4,6 +4,8 @@ import { CommentType, SuggestionType } from "utils/types";
 import AddReply from "../reply/AddReply";
 import ReplyList from "../reply/ReplyList";
 import DeleteButton from "@components/feedback/feedbackDetails/delete/DeleteButton";
+import { useParams } from "react-router-dom";
+import { makeRequest } from "utils/makeRequest";
 
 interface CommentProp {
   comment: CommentType;
@@ -12,10 +14,23 @@ interface CommentProp {
 
 const Comment = ({ comment, setFeedback }: CommentProp) => {
   const [addReply, setAddReply] = useState<boolean>(false);
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext);
+  const params = useParams();
 
   const toggleAddComment = () => {
     setAddReply(!addReply);
+  };
+
+  const handleDeleteComment = async () => {
+    try {
+      const res = await makeRequest.delete(
+        `/comment/deleteComment/${params.feedbackId}?commentId=${comment._id}`,
+      );
+      setFeedback(res.data)
+
+    }catch(err){
+      console.error(err)
+    }
   };
 
   return (
@@ -38,7 +53,9 @@ const Comment = ({ comment, setFeedback }: CommentProp) => {
           <span className="font-bold capitalize tracking-[-0.181px] md:tracking-[-0.194px]">
             {comment.user.name}
           </span>
-          <span>{comment.user.username}</span>
+          <span className="text-dark-gray-#647196">
+            @{comment.user.username}
+          </span>
         </div>
         <div className="ml-auto flex flex-col items-center gap-1">
           <button
@@ -47,15 +64,17 @@ const Comment = ({ comment, setFeedback }: CommentProp) => {
           >
             Reply
           </button>
-          {user?._id === comment.user.userId && <DeleteButton commentId={comment._id} setFeedback={setFeedback} />}
+          {user?._id === comment.user.userId && (
+            <DeleteButton handleDelete={handleDeleteComment} type="comment" />
+          )}
         </div>
       </div>
 
-      <div className="relative col-start-1 col-end-[-1] md:col-start-2">
+      <div className="relative col-start-1 col-end-[-1] md:col-start-2 md:col-end-[-1]">
         <p
           className={`text-[0.8125rem] text-dark-gray-#647196 md:text-[0.9375rem] ${
             comment.replies.length > 0 && "mt-4"
-          }`}
+          } `}
         >
           {comment.content}
         </p>

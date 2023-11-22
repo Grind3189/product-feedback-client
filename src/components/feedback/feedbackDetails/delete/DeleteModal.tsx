@@ -3,9 +3,10 @@ import CustomButton from "@components/shared/CustomButton";
 interface DeleteModalProp {
   toggleModal: () => void;
   handleDelete: () => void
+  type: string
 }
 
-const DeleteModal = ({ toggleModal, handleDelete }: DeleteModalProp) => {
+const DeleteModal = ({ toggleModal, handleDelete, type }: DeleteModalProp) => {
  
   return (
     <div
@@ -16,9 +17,9 @@ const DeleteModal = ({ toggleModal, handleDelete }: DeleteModalProp) => {
         className="flex flex-col gap-4 rounded-[10px] bg-white p-6 text-light-navy-blue-#3A4374 md:w-[480px]"
         onClick={(e) => e.stopPropagation()}
       >
-        <h1 className="text-[1.125rem] font-bold">Delete this comment?</h1>
+        <h1 className="text-[1.125rem] font-bold">Delete this {type}?</h1>
         <p className="text-[0.8125rem] font-medium text-dark-gray-#647196">
-          Are you sure you want to delete this comment?
+          Are you sure you want to delete this {type}?
         </p>
         <div className="flex flex-col gap-4">
           <CustomButton bgColor="red" handleClick={handleDelete}>

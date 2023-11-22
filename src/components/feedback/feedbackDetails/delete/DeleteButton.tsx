@@ -1,33 +1,16 @@
-import { useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 import { useState } from "react";
-import { makeRequest } from "utils/makeRequest";
-import { SuggestionType } from "utils/types";
 
 interface DeleteButtonProp {
-  commentId: string;
-  setFeedback: React.Dispatch<React.SetStateAction<SuggestionType | undefined>>
+  handleDelete: () => void;
+  type: string;
 }
 
-const DeleteButton = ({ commentId, setFeedback }: DeleteButtonProp) => {
+const DeleteButton = ({ handleDelete, type }: DeleteButtonProp) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
-  const params = useParams();
-  const suggestionId = params.feedbackId;
 
   const toggleDeleteModal = () => {
     setShowDeleteModal((prev) => !prev);
-  };
-
-  const handleDelete = async () => {
-    try {
-      const res = await makeRequest.delete(
-        `/comment/deleteComment?suggestionId=${suggestionId}&commentId=${commentId}`,
-      );
-      setFeedback(res.data)
-
-    }catch(err){
-      console.error(err)
-    }
   };
 
   return (
@@ -48,7 +31,13 @@ const DeleteButton = ({ commentId, setFeedback }: DeleteButtonProp) => {
           />
         </svg>
       </button>
-      {showDeleteModal && <DeleteModal toggleModal={toggleDeleteModal} handleDelete={handleDelete}/>}
+      {showDeleteModal && (
+        <DeleteModal
+          toggleModal={toggleDeleteModal}
+          handleDelete={handleDelete}
+          type={type}
+        />
+      )}
     </>
   );
 };
