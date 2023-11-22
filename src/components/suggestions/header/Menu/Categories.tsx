@@ -1,7 +1,11 @@
 import { Link, useSearchParams } from "react-router-dom";
 import MenuCard from "./MenuCard";
 
-const Categories = () => {
+interface CategoriesProp {
+  toggleMenu: () => void
+}
+
+const Categories = ({toggleMenu}: CategoriesProp) => {
   const [searchParams] = useSearchParams();
   const categoryParams = searchParams.get("category");
   const categories: string[] = [
@@ -32,6 +36,8 @@ const Categories = () => {
                   : "bg-gray-#F2F4FF"
               }`}
               key={category}
+              onClick={toggleMenu}
+
             >
               <Link
                 to={genNewSearchParams("category", category)}

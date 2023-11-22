@@ -15,7 +15,7 @@ const FormButtons = ({ handleAddSuggestion, newFeedback }: FormButtonsProp) => {
 
   return (
     <div className="mt-10 flex flex-col gap-4 md:flex-row md:justify-end">
-      <Link to={location.state ? location.state.prevPath : "/"}>
+      <Link to={location.state ? location.state.prevPath : "/"} className="inline-block border">
         <CustomButton bgColor="light navy blue">
           Cancel
         </CustomButton>

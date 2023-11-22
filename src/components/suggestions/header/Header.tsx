@@ -52,7 +52,7 @@ const Header = () => {
         </button>
       </div>
 
-      <NavMenu isMenuOpen={openNav} toggleMenu={toggleNav} />
+      <NavMenu isMenuOpen={openNav} toggleMenu={toggleNav}/>
     </header>
   );
 };

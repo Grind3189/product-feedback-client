@@ -14,6 +14,7 @@ function App() {
 
         <Route element={<FeedbackLayout />}>
           <Route path="feedback/create" element={<NewFeedback />} />
+          <Route path="feedback/edit/:feedbackId" element={<NewFeedback />} />
           <Route path="feedback/:feedbackId" element={<Feedback />} />
         </Route>
       </Route>
