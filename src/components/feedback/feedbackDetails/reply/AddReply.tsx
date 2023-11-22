@@ -23,7 +23,7 @@ const AddReply = ({ replyingTo, commentId, setFeedback, toggleAddComment }: AddR
 
   const handleAddReply = async () => {
     try {
-      const res = await makeRequest.post(`suggestion/addReply/${feedbackId}`, {
+      const res = await makeRequest.post(`comment/addReply/${feedbackId}`, {
         commentId,
         replyingTo,
         reply,

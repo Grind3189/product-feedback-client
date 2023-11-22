@@ -4,13 +4,16 @@ import App from "./App.tsx";
 import { HashRouter as Router } from "react-router-dom";
 import "./index.css";
 import WidthContextProvider from "context/WidthContext.tsx";
+import UserContextProvider from "context/UserContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Router>
-      <WidthContextProvider>
-        <App />
-      </WidthContextProvider>
+      <UserContextProvider>
+        <WidthContextProvider>
+          <App />
+        </WidthContextProvider>
+      </UserContextProvider>
     </Router>
   </React.StrictMode>,
 );

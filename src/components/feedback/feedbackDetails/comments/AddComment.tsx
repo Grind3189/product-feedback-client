@@ -22,7 +22,7 @@ const AddComment = ({ setFeedback }: AddCommentProp) => {
     if (newComment) {
       try {
         const res = await makeRequest.post(
-          `suggestion/addComment/${feedbackId}`,
+          `comment/addComment/${feedbackId}`,
           {
             newComment,
           },

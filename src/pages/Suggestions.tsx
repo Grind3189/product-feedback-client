@@ -2,7 +2,8 @@ import EmptySuggestions from "@components/suggestions/empty/EmptySuggestions";
 import Header from "@components/suggestions/header/Header";
 import SortSuggestions from "@components/suggestions/sort/SortSuggestions";
 import SuggestionsList from "@components/suggestions/suggestionsList/SuggestionsList";
-import { useEffect, useState } from "react";
+import { UserContext } from "context/UserContext";
+import { useEffect, useState, useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import { makeRequest } from "utils/makeRequest";
 import { SuggestionType } from "utils/types";
@@ -11,6 +12,7 @@ function Suggestions() {
   const [suggestions, setSuggestions] = useState<SuggestionType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchParams] = useSearchParams();
+  const {setUser} = useContext(UserContext)
   const query = searchParams.toString() || "";
 
   useEffect(() => {
@@ -19,8 +21,10 @@ function Suggestions() {
       try {
         const res = await makeRequest.get(
           `/suggestion/getAll${query && "?" + query}`
-        );
-        setSuggestions(res.data.suggestions);
+          );
+          setSuggestions(res.data.suggestions);
+          setUser(res.data.currentUser)
+          localStorage.setItem("user", JSON.stringify(res.data.currentUser))
       } catch (err) {
         console.error(err);
       } finally {

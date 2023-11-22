@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "context/UserContext";
+import { CommentType, SuggestionType } from "utils/types";
 import AddReply from "../reply/AddReply";
 import ReplyList from "../reply/ReplyList";
-import { CommentType, SuggestionType } from "utils/types";
-import DeleteButton from "@components/shared/DeleteButton";
+import DeleteButton from "@components/feedback/feedbackDetails/delete/DeleteButton";
 
 interface CommentProp {
   comment: CommentType;
@@ -11,6 +12,7 @@ interface CommentProp {
 
 const Comment = ({ comment, setFeedback }: CommentProp) => {
   const [addReply, setAddReply] = useState<boolean>(false);
+  const {user} = useContext(UserContext)
 
   const toggleAddComment = () => {
     setAddReply(!addReply);
@@ -45,7 +47,7 @@ const Comment = ({ comment, setFeedback }: CommentProp) => {
           >
             Reply
           </button>
-          <DeleteButton />
+          {user?._id === comment.user.userId && <DeleteButton commentId={comment._id} setFeedback={setFeedback} />}
         </div>
       </div>
 

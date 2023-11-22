@@ -26,4 +26,5 @@ export interface UserType {
   image: string;
   name: string;
   username: string;
+  userId?: string
 }
