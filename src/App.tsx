@@ -13,8 +13,8 @@ function App() {
         <Route index element={<Suggestions />} />
 
         <Route element={<FeedbackLayout />}>
-          <Route path="feedback/create" element={<NewFeedback />} />
-          <Route path="feedback/edit/:feedbackId" element={<NewFeedback />} />
+          <Route path="feedback/create" element={<NewFeedback type="create" />} />
+          <Route path="feedback/edit/:feedbackId" element={<NewFeedback type="edit" />} />
           <Route path="feedback/:feedbackId" element={<Feedback />} />
         </Route>
       </Route>

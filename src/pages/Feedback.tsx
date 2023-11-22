@@ -17,6 +17,7 @@ const Feedback = () => {
       try {
         const res = await makeRequest.get(`/suggestion/${params.feedbackId}`);
         setFeedback(res.data);
+        localStorage.setItem("feedbackCreator", JSON.stringify(res.data.userId))
       } catch (err) {
         console.error(err);
       } finally {

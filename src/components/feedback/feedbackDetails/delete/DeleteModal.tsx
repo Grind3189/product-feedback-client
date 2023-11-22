@@ -2,7 +2,7 @@ import CustomButton from "@components/shared/CustomButton";
 
 interface DeleteModalProp {
   toggleModal: () => void;
-  handleDelete: () => void
+  handleDelete: any
   type: string
 }
 
