@@ -2,12 +2,17 @@ import CustomButton from "@components/shared/CustomButton";
 
 interface DeleteModalProp {
   toggleModal: () => void;
-  handleDelete: any
-  type: string
+  handleDelete: any;
+  type: string;
+  isDeleting: boolean;
 }
 
-const DeleteModal = ({ toggleModal, handleDelete, type }: DeleteModalProp) => {
- 
+const DeleteModal = ({
+  toggleModal,
+  handleDelete,
+  type,
+  isDeleting,
+}: DeleteModalProp) => {
   return (
     <div
       className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center border bg-black/50"
@@ -23,7 +28,7 @@ const DeleteModal = ({ toggleModal, handleDelete, type }: DeleteModalProp) => {
         </p>
         <div className="flex flex-col gap-4">
           <CustomButton bgColor="red" handleClick={handleDelete}>
-            Delete
+            {isDeleting ? "Deleting..." : "Delete"}
           </CustomButton>
           <CustomButton bgColor="light navy blue" handleClick={toggleModal}>
             Cancel

@@ -13,6 +13,7 @@ type FormButtonsProp = {
   type: "create" | "edit";
   prevFeedbackValue: NewFeedbackType | undefined;
   toggleDelete: () => void;
+  isSubmitting: boolean;
 };
 
 const FormButtons = ({
@@ -21,6 +22,7 @@ const FormButtons = ({
   type,
   prevFeedbackValue,
   toggleDelete,
+  isSubmitting,
 }: FormButtonsProp) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -68,7 +70,11 @@ const FormButtons = ({
             type === "create" ? hasBlankInput : hasBlankInput || hasChanged
           }
         >
-          {type === "create" ? "Add Feedback" : "Save Changes"}
+          {type === "create" ? (
+            <span>{isSubmitting ? "Submitting..." : "Save"}</span>
+          ) : (
+            <span>{isSubmitting ? "Saving changes..." : "Save changes"}</span>
+          )}
         </CustomButton>
       </div>
     </div>

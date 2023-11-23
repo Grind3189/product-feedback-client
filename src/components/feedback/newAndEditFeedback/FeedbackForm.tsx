@@ -1,11 +1,11 @@
 import FormInputs from "./FormInputs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { makeRequest } from "utils/makeRequest";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import FormButtons from "./FormButtons";
 import DeleteModal from "../feedbackDetails/delete/DeleteModal";
 
-interface NewFeedbackProp {
+interface NewFeedbackState {
   title: string;
   category: string;
   description: string;
@@ -13,39 +13,25 @@ interface NewFeedbackProp {
 
 interface FeedbackFormProp {
   type: "create" | "edit";
+  prevFeedback?: NewFeedbackState | undefined;
 }
 
-const FeedbackForm = ({ type }: FeedbackFormProp) => {
+const FeedbackForm = ({ type, prevFeedback }: FeedbackFormProp) => {
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [newFeedback, setNewFeedback] = useState<NewFeedbackProp>({
-    title: "",
-    category: "feature",
-    description: "",
-  });
-  const [prevFeedback, setPrevFeedback] = useState<NewFeedbackProp>();
+  const [newFeedback, setNewFeedback] = useState<NewFeedbackState>(
+    prevFeedback
+      ? prevFeedback
+      : {
+          title: "",
+          category: "feature",
+          description: "",
+        },
+  );
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await makeRequest.get(`/suggestion/${params?.feedbackId}`);
-      setPrevFeedback({
-        title: res.data.title,
-        category: res.data.category,
-        description: res.data.description,
-      });
-      setNewFeedback({
-        title: res.data.title,
-        category: res.data.category,
-        description: res.data.description,
-      });
-    };
-    if (type === "edit") {
-      fetchData();
-    }
-  }, []);
-
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const handleInputChange = (
     e:
@@ -63,6 +49,7 @@ const FeedbackForm = ({ type }: FeedbackFormProp) => {
   const handleSaveSuggestion = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
+      setIsSubmitting(true);
       await makeRequest.post(`/suggestion/edit/${params.feedbackId}`, {
         title: newFeedback.title,
         category: newFeedback.category,
@@ -71,17 +58,22 @@ const FeedbackForm = ({ type }: FeedbackFormProp) => {
       handleNavigate();
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleAddSuggestion = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
+      setIsSubmitting(true);
       await makeRequest.post("/suggestion/addSuggestion", {
         newFeedbackData: newFeedback,
       });
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsSubmitting(false);
     }
     handleNavigate();
   };
@@ -101,10 +93,13 @@ const FeedbackForm = ({ type }: FeedbackFormProp) => {
   const handleDeleteSuggestion = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
+      setIsDeleting(true);
       await makeRequest.delete(`/suggestion/delete/${params.feedbackId}`);
       navigate("/");
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -136,12 +131,14 @@ const FeedbackForm = ({ type }: FeedbackFormProp) => {
         type={type}
         prevFeedbackValue={prevFeedback}
         toggleDelete={toggleModal}
+        isSubmitting={isSubmitting}
       />
       {showDeleteModal && (
         <DeleteModal
           type="suggestion"
           toggleModal={toggleModal}
           handleDelete={handleDeleteSuggestion}
+          isDeleting={isDeleting}
         />
       )}
     </form>
