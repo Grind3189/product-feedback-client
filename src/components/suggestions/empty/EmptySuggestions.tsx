@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 const EmptySuggestions = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
 
   const handleNavigateToAdd = () => {
     navigate("feedback/create", {
