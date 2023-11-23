@@ -4,14 +4,14 @@ interface DeleteModalProp {
   toggleModal: () => void;
   handleDelete: any;
   type: string;
-  isDeleting: boolean;
+  isDeleting?: boolean;
 }
 
 const DeleteModal = ({
   toggleModal,
   handleDelete,
   type,
-  isDeleting,
+  isDeleting = false,
 }: DeleteModalProp) => {
   return (
     <div
