@@ -31,15 +31,13 @@ const FeedbackLayout = () => {
   return (
     <div className="max-w-[730px] max-md:p-6">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+        <Link
+          to={location.state ? location.state.prevPath : "/"}
+          className=" flex items-center gap-4 text-[0.8125rem] font-bold text-dark-gray-#647196 md:text-[0.875rem]"
+        >
           <img src={arrowLeftIc} alt="arrow left icon" />
-          <Link
-            to={location.state ? location.state.prevPath : "/"}
-            className="text-[0.8125rem] font-bold text-dark-gray-#647196 md:text-[0.875rem]"
-          >
-            Go Back
-          </Link>
-        </div>
+          Go Back
+        </Link>
         {isCreator && location.state?.currentPath !== "edit" && (
           <Link
             to={`/feedback/edit/${params.feedbackId}`}
