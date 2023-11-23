@@ -29,7 +29,7 @@ const Categories = ({toggleMenu}: CategoriesProp) => {
         {categories.map((category) => {
           return (
             <li
-              className={`rounded-[0.625rem] text-blue-#4661E6 ${
+              className={`rounded-[0.625rem] text-blue-#4661E6 transition-all lg:hover:bg-[#CFD7FF] ${
                 categoryParams === category ||
                 (!categoryParams && category === "All")
                   ? "bg-blue-#4661E6 text-white"

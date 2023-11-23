@@ -13,7 +13,7 @@ const CustomButton = ({
 }: CustomButtonProp) => {
   return (
     <button
-      className={`rounded-[10px] disabled:cursor-not-allowed ${
+      className={`rounded-[10px] disabled:cursor-not-allowed transition-all ${
         bgColor === "purple"
           ? "bg-purple-#AD1FEA disabled:bg-[#C75AF6] lg:hover:bg-[#C75AF6]"
           : bgColor === "red"

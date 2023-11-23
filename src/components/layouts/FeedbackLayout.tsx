@@ -11,8 +11,6 @@ const FeedbackLayout = () => {
   const location = useLocation();
   const params = useParams();
 
-  console.log(location)
-
   useEffect(() => {
     const fetchFeedback = async () => {
       try {
@@ -25,10 +23,10 @@ const FeedbackLayout = () => {
         console.error(err);
       }
     };
-
-    fetchFeedback();
+    if (params?.feedbackId) {
+      fetchFeedback();
+    }
   }, []);
-
 
   return (
     <div className="max-w-[730px] max-md:p-6">
@@ -37,16 +35,15 @@ const FeedbackLayout = () => {
           <img src={arrowLeftIc} alt="arrow left icon" />
           <Link
             to={location.state ? location.state.prevPath : "/"}
-            state={{currentPath: "edit"}}
             className="text-[0.8125rem] font-bold text-dark-gray-#647196 md:text-[0.875rem]"
           >
             Go Back
           </Link>
         </div>
-        {isCreator && (
+        {isCreator && location.state?.currentPath !== "edit" && (
           <Link
             to={`/feedback/edit/${params.feedbackId}`}
-            state={{ prevPath: location.pathname }}
+            state={{ currentPath: "edit", prevPath: location.pathname }}
           >
             <CustomButton bgColor="blue">Edit Feedback</CustomButton>
           </Link>

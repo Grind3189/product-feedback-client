@@ -59,7 +59,7 @@ const Comment = ({ comment, setFeedback }: CommentProp) => {
         </div>
         <div className="ml-auto flex flex-col items-center gap-1">
           <button
-            className="font-semibold text-blue-#4661E6"
+            className="font-semibold text-blue-#4661E6 lg:hover:underline"
             onClick={toggleAddComment}
           >
             Reply

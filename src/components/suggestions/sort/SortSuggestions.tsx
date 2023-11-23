@@ -26,7 +26,8 @@ const SortSuggestions = ({ suggestionsCount }: SortSuggestionsProp) => {
         state={{
           prevPath: location.search
             ? location.pathname + location.search
-            : location.pathname
+            : location.pathname,
+          currentPath: "create",
         }}
       >
         <CustomButton bgColor="purple">+ Add Feedback</CustomButton>

@@ -17,7 +17,10 @@ const Feedback = () => {
       try {
         const res = await makeRequest.get(`/suggestion/${params.feedbackId}`);
         setFeedback(res.data);
-        localStorage.setItem("feedbackCreator", JSON.stringify(res.data.userId))
+        localStorage.setItem(
+          "feedbackCreator",
+          JSON.stringify(res.data.userId),
+        );
       } catch (err) {
         console.error(err);
       } finally {
@@ -30,8 +33,7 @@ const Feedback = () => {
 
   const handleLike = async () => {
     const res = await makeRequest.get(`/suggestion/like/${params.feedbackId}`);
-    setFeedback(res.data)
-    
+    setFeedback(res.data);
   };
 
   return (
@@ -42,9 +44,24 @@ const Feedback = () => {
         </h1>
       ) : (
         <>
-          {feedback && <SuggestionCard suggestion={feedback} handleClick={handleLike} type="view" />}
-          {feedback?.comments && <CommentList comments={feedback.comments} setFeedback={setFeedback} />}
-          <AddComment setFeedback={setFeedback} />
+          {feedback ? (
+            <SuggestionCard
+              suggestion={feedback}
+              handleClick={handleLike}
+              type="view"
+            />
+          ) : (
+            <h1 className="text-[2rem] font-bold text-light-navy-blue-#3A4374 md:w-[689px] xl:w-[730px]">
+              No feedback found
+            </h1>
+          )}
+          {feedback?.comments && (
+            <CommentList
+              comments={feedback.comments}
+              setFeedback={setFeedback}
+            />
+          )}
+          {feedback && <AddComment setFeedback={setFeedback} />}
         </>
       )}
     </main>

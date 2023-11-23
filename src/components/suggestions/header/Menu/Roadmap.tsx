@@ -28,7 +28,7 @@ const Roadmap = () => {
             ? location.pathname + location.search
             : location.pathname,
         }}
-          className="text-[0.8125rem] font-semibold text-blue-#4661E6 underline"
+          className="text-[0.8125rem] font-semibold text-blue-#4661E6 underline lg:hover:text-[#8397F8]"
         >
           View
         </Link>

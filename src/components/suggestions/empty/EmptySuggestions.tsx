@@ -1,7 +1,21 @@
 import emptyIllus from "@assets/suggestions/illustration-empty.svg";
 import CustomButton from "../../shared/CustomButton";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const EmptySuggestions = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
+
+  const handleNavigateToAdd = () => {
+    navigate("feedback/create", {
+      state: {
+        prevPath: location.search
+          ? location.pathname + location.search
+          : location.pathname,
+      },
+    });
+  };
   return (
     <section className="flex h-[460px] flex-col items-center justify-center rounded-[10px] bg-white px-6 md:h-[600px]">
       <img
@@ -16,7 +30,9 @@ const EmptySuggestions = () => {
         Got a suggestion? Found a bug that needs to be squashed? We love hearing
         about new ideas to improve our app.
       </p>
-      <CustomButton bgColor="purple">+ Add Feedback</CustomButton>
+      <CustomButton bgColor="purple" handleClick={handleNavigateToAdd}>
+        + Add Feedback
+      </CustomButton>
     </section>
   );
 };

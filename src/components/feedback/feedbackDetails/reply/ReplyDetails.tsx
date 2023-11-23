@@ -59,7 +59,7 @@ const ReplyDetails = ({
         </div>
         <div className="flex flex-col items-center gap-1">
           <button
-            className="ml-auto font-semibold text-blue-#4661E6"
+            className="ml-auto font-semibold text-blue-#4661E6 lg:hover:underline"
             onClick={handleToggleReply}
           >
             Reply
